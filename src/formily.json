@@ -6,31 +6,89 @@
   "schema": {
     "type": "object",
     "properties": {
-      "4444": {
+      "d7q8tvuap0l": {
         "type": "string",
-        "title": "Input",
+        "title": "表达式校验",
         "x-decorator": "FormItem",
         "x-component": "Input",
-        "x-validator": [],
+        "x-validator": [
+          {
+            "triggerType": "onInput",
+            "validator": "{{(value) => {\r\n  if (!value) return ''\r\n    return value === '123'\r\n}\r\n}}",
+            "message": "请输入123"
+          }
+        ],
         "x-component-props": {},
         "x-decorator-props": {},
-        "name": "4444",
-        "x-display": "visible",
         "x-designable-id": "d7q8tvuap0l",
-        "x-index": 0
+        "x-index": 0,
+        "required": true
       },
-      "s9yvpk2w8zl": {
+      "z332y5kmhux": {
         "type": "string",
-        "title": "Input",
+        "title": "正则校验",
         "x-decorator": "FormItem",
         "x-component": "Input",
+        "x-validator": [
+          {
+            "triggerType": "onInput",
+            "pattern": "^456$",
+            "message": "请输入456"
+          }
+        ],
+        "x-component-props": {},
+        "x-decorator-props": {},
+        "required": true,
+        "x-designable-id": "z332y5kmhux",
+        "x-index": 1
+      },
+      "nq47yjwfchh": {
+        "title": "下拉选框",
+        "x-decorator": "FormItem",
+        "x-component": "Select",
         "x-validator": [],
         "x-component-props": {},
         "x-decorator-props": {},
-        "x-designable-id": "s9yvpk2w8zl",
-        "x-index": 1
+        "required": true,
+        "enum": [
+          {
+            "children": [],
+            "label": "选项1",
+            "value": "1"
+          },
+          {
+            "children": [],
+            "label": "选项2",
+            "value": "2"
+          }
+        ],
+        "x-designable-id": "nq47yjwfchh",
+        "x-index": 2
+      },
+      "b64xxjfir20": {
+        "title": "API下拉选框",
+        "x-decorator": "FormItem",
+        "x-component": "Select",
+        "x-validator": [],
+        "x-component-props": {},
+        "x-decorator-props": {},
+        "x-reactions": {
+          "dependencies": [
+            {
+              "property": "value",
+              "type": "any",
+              "source": "z332y5kmhux",
+              "name": "v_vv3z2kjx80y"
+            }
+          ],
+          "fulfill": {
+            "run": "$effect(() => {\n  $self.loading = true\n  fetch(\n    \"https://cdn.jsdelivr.net/gh/Rain1874/lowcode-source@main/src/asyncSelect2.json\"\n  )\n    .then((response) => response.json())\n    .then(\n      ({ data }) => {\n        console.log(data)\n        $self.loading = false\n        $self.dataSource = data\n      },\n      (err) => {\n        console.log('err',err)\n        $self.loading = false\n      }\n    )\n}, [])\n"
+          }
+        },
+        "x-designable-id": "b64xxjfir20",
+        "x-index": 3
       }
     },
-    "x-designable-id": "2317frkn66m"
+    "x-designable-id": "fh2v3w3lu81"
   }
 }
